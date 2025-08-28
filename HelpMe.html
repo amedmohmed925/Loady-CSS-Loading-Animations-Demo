@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpMe - FAQ</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background-color: white;
+            padding: 20px;
+        }
+
+        /* Container for the FAQ section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .faq-header h1 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            font-size: 32px;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        .faq-header p {
+            font-size: 16px;
+            color: #666666;
+        }
+
+        /* Accordion styles */
+        .faq-accordion {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Question styles */
+        .faq-question {
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            font-size: 18px;
+            color: #333333;
+            background-color: white;
+            padding: 20px;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        /* Active question (expanded) styling */
+        .faq-question.active {
+            color: #2980B9;
+        }
+
+        /* Hover effect for questions */
+        .faq-question:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Plus/minus indicator */
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #666666;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .faq-question.active::after {
+            content: '-';
+            color: #2980B9;
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        /* Answer styles */
+        .faq-answer {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #333333;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        /* Expanded answer styling */
+        .faq-answer.expanded {
+            /* max-height is set dynamically by JS for smooth animation */
+            padding: 20px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .faq-header h1 {
+                font-size: 28px;
+            }
+
+            .faq-question {
+                font-size: 16px;
+                padding: 15px;
+            }
+
+            .faq-question::after {
+                right: 15px;
+                font-size: 20px;
+            }
+
+            .faq-answer.expanded {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .faq-header h1 {
+                font-size: 24px;
+            }
+
+            .faq-question {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .faq-answer {
+                font-size: 14px;
+            }
+
+            .faq-answer.expanded {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="faq-container">
+        <!-- FAQ Header -->
+        <div class="faq-header">
+            <h1>HelpMe FAQ</h1>
+            <p>Find answers to frequently asked questions</p>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div class="faq-accordion">
+            <!-- FAQ Item 1 -->
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    How do I create a new account?
+                </button>
+                <div class="faq-answer">
+                    To create a new account, click on the "Sign Up" button in the top right corner of our homepage. Fill in your email address, create a secure password, and verify your email. Once verified, you'll have full access to all HelpMe features and can start using our services immediately.
+                </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    What payment methods do you accept?
+                </button>
+                <div class="faq-answer">
+                    We accept all major credit cards including Visa, MasterCard, American Express, and Discover. We also support PayPal, Apple Pay, and Google Pay for your convenience. All payments are processed securely through encrypted connections to protect your financial information.
+                </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    How can I reset my password?
+                </button>
+                <div class="faq-answer">
+                    If you've forgotten your password, go to the login page and click "Forgot Password?" Enter your email address, and we'll send you a secure link to reset your password. The link will expire after 24 hours for security purposes. If you don't receive the email, check your spam folder or contact our support team.
+                </div>
+            </div>
+
+            <!-- FAQ Item 4 -->
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    Is my personal information secure?
+                </button>
+                <div class="faq-answer">
+                    Absolutely! We take your privacy and security very seriously. All personal information is encrypted using industry-standard SSL encryption. We never share your data with third parties without your explicit consent, and our servers are regularly audited for security compliance. Your data is stored in secure, GDPR-compliant data centers.
+                </div>
+            </div>
+
+            <!-- FAQ Item 5 -->
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    How do I contact customer support?
+                </button>
+                <div class="faq-answer">
+                    You can reach our customer support team in several ways: send an email to support@helpme.com, use our live chat feature available 24/7 on our website, or call our toll-free number at 1-800-HELP-ME. Our support team typically responds to emails within 2-4 hours during business days.
+                </div>
+            </div>
+
+            <!-- FAQ Item 6 -->
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    Can I cancel my subscription anytime?
+                </button>
+                <div class="faq-answer">
+                    Yes, you can cancel your subscription at any time with no cancellation fees. Simply go to your account settings and click "Cancel Subscription." You'll continue to have access to all features until the end of your current billing period. If you change your mind, you can reactivate your subscription before it expires.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all FAQ question buttons
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            // Add click event listener to each question
+            faqQuestions.forEach(function(question) {
+                question.addEventListener('click', function() {
+                    // Get the corresponding answer element
+                    const answer = this.nextElementSibling;
+                    
+                    // Check if this question is currently active
+                    const isActive = this.classList.contains('active');
+                    
+                    // Close all other questions first (accordion behavior)
+                    closeAllQuestions();
+                    
+                    // If this question wasn't active, open it
+                    if (!isActive) {
+                        openQuestion(this, answer);
+                    }
+                });
+            });
+            
+            /**
+             * Opens a specific FAQ question and its answer
+             * @param {Element} question - The question button element
+             * @param {Element} answer - The answer div element
+             */
+            function openQuestion(question, answer) {
+                question.classList.add('active');
+                answer.classList.add('expanded');
+                
+                // Set max-height to actual scroll height for smooth animation
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            }
+            
+            /**
+             * Closes all FAQ questions and answers
+             */
+            function closeAllQuestions() {
+                faqQuestions.forEach(function(question) {
+                    const answer = question.nextElementSibling;
+                    
+                    // Remove active classes
+                    question.classList.remove('active');
+                    answer.classList.remove('expanded');
+                    
+                    // Reset max-height for smooth closing animation
+                    answer.style.maxHeight = '0px';
+                });
+            }
+            
+            // Handle window resize to recalculate heights if needed
+            window.addEventListener('resize', function() {
+                const activeAnswers = document.querySelectorAll('.faq-answer.expanded');
+                activeAnswers.forEach(function(answer) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

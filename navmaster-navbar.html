@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NavMaster - Responsive Navigation</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding-top: 70px; /* Account for fixed navbar */
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            background-color: #2C3E50; /* Dark blue background */
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Logo Styles */
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo:hover {
+            color: #E74C3C; /* Light red accent on hover */
+        }
+
+        /* Navigation Menu Container */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation Menu Items */
+        .nav-item {
+            margin-left: 30px;
+        }
+
+        .nav-link {
+            color: #E74C3C; /* Light red accent links */
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        /* Hover effects for navigation links */
+        .nav-link:hover {
+            color: white;
+            background-color: rgba(231, 76, 60, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hamburger Menu Button (hidden by default) */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hamburger:hover {
+            background-color: rgba(231, 76, 60, 0.2);
+        }
+
+        /* Hamburger menu lines */
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #E74C3C;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Hamburger animation when active */
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(9px, 9px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Demo content for visual reference */
+        .content {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content h1 {
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive Styles for Mobile Devices */
+        @media screen and (max-width: 768px) {
+            /* Show hamburger menu on mobile */
+            .hamburger {
+                display: flex;
+            }
+
+            /* Hide navigation menu by default on mobile */
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: #2C3E50;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                transition: left 0.3s ease;
+                padding-top: 50px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            /* Show navigation menu when active */
+            .nav-menu.active {
+                left: 0;
+            }
+
+            /* Stack menu items vertically on mobile */
+            .nav-item {
+                margin: 10px 0;
+                width: 80%;
+                text-align: center;
+            }
+
+            .nav-link {
+                width: 100%;
+                padding: 15px;
+                font-size: 18px;
+                border-radius: 10px;
+            }
+
+            /* Adjust navbar padding for mobile */
+            .navbar {
+                padding: 0 15px;
+            }
+
+            /* Adjust logo size for mobile */
+            .logo {
+                font-size: 20px;
+            }
+        }
+
+        /* Tablet styles */
+        @media screen and (max-width: 1024px) and (min-width: 769px) {
+            .nav-item {
+                margin-left: 20px;
+            }
+            
+            .nav-link {
+                font-size: 15px;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <!-- Logo -->
+        <a href="#" class="logo">NavMaster</a>
+        
+        <!-- Navigation Menu -->
+        <ul class="nav-menu" id="nav-menu">
+            <li class="nav-item">
+                <a href="#home" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#about" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="#services" class="nav-link">Services</a>
+            </li>
+            <li class="nav-item">
+                <a href="#contact" class="nav-link">Contact</a>
+            </li>
+        </ul>
+        
+        <!-- Hamburger Menu Button -->
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Demo Content -->
+  
+
+    <script>
+        // JavaScript for Mobile Menu Toggle Functionality
+        
+        // Get references to the hamburger button and navigation menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        // Add click event listener to hamburger button
+        hamburger.addEventListener('click', function() {
+            // Toggle the 'active' class on both hamburger and nav menu
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when a navigation link is clicked
+        // This improves user experience on mobile devices
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                // Remove active classes to close the mobile menu
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Optional: Close mobile menu when clicking outside of it
+        document.addEventListener('click', function(event) {
+            // Check if the click was outside the navbar
+            const navbar = document.querySelector('.navbar');
+            
+            if (!navbar.contains(event.target) && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Optional: Handle window resize to close mobile menu if switching to desktop view
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
