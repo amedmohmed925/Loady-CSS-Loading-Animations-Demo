@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loady CSS Loading Animations Demo</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #e0e6ed 0%, #cccccc 100%);
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.01em;
+    }
+    .loady-demo-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 3rem 0;
+    }
+    .loady-animation-block {
+      position: relative;
+      background: rgba(255,255,255,0.38);
+      border-radius: 2.2rem;
+      box-shadow: 0 12px 40px 0 rgba(41,128,185,0.13), 0 2px 12px 0 rgba(41,128,185,0.10);
+      padding: 3.2rem 2.3rem 2.3rem 2.3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 260px;
+      backdrop-filter: blur(18px) saturate(1.3);
+      border: 2.5px solid rgba(41,128,185,0.18);
+      overflow: hidden;
+      transition: box-shadow 0.38s cubic-bezier(.4,0,.2,1), transform 0.28s cubic-bezier(.4,0,.2,1);
+    }
+    .loady-animation-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 7px;
+      border-top-left-radius: 2.2rem;
+      border-top-right-radius: 2.2rem;
+      background: linear-gradient(90deg, #6dd5fa 0%, #2980B9 100%);
+      opacity: 0.85;
+      z-index: 2;
+      box-shadow: 0 2px 8px #2980b933;
+      pointer-events: none;
+    }
+    .loady-animation-block::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, #eaf6ff33 0%, #6dd5fa11 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .loady-animation-block > * {
+      position: relative;
+      z-index: 3;
+    }
+    .loady-animation-block:hover {
+      box-shadow: 0 24px 64px 0 rgba(41,128,185,0.22), 0 4px 24px 0 rgba(41,128,185,0.18);
+      transform: translateY(-10px) scale(1.045) rotate(-0.5deg);
+      border-color: #2980B9;
+    }
+    .loady-label {
+      margin-top: 1.8rem;
+      font-weight: 900;
+      font-size: 1.19rem;
+      color: #1a2836;
+      letter-spacing: 0.045em;
+      text-align: center;
+      text-shadow: 0 1px 0 #fff, 0 2px 12px #b0c4de33;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    /* Spinning Circle Modern */
+    .loady-spinner {
+      width: 56px;
+      height: 56px;
+      border: 5px solid rgba(41,128,185,0.13);
+      border-top: 5px solid #2980B9;
+      border-right: 5px solid #6dd5fa;
+      border-radius: 50%;
+      animation: loady-spin 0.85s cubic-bezier(.6,.2,.4,1) infinite;
+      box-shadow: 0 0 16px 0 #2980b955, 0 2px 8px #6dd5fa33;
+      background: linear-gradient(135deg, #eaf6ff 0%, #f7fbff 100%);
+      transition: border-top-color 0.3s, border-right-color 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    .loady-spinner::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle, #2980B9 60%, #6dd5fa 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 8px #2980b955;
+      opacity: 0.85;
+    }
+    .loady-animation-block:hover .loady-spinner {
+      border-top-color: #1c5a85;
+      border-right-color: #2980B9;
+      box-shadow: 0 0 32px 0 #2980b9aa, 0 4px 16px #6dd5fa55;
+    }
+    @keyframes loady-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    /* Bouncing Dot Modern */
+    .loady-bounce {
+      width: 22px;
+      height: 22px;
+      background: radial-gradient(circle at 60% 40%, #6dd5fa 0%, #2980B9 100%);
+      border-radius: 50%;
+      animation: loady-bounce 0.75s cubic-bezier(.68,-0.55,.27,1.55) infinite;
+      margin-bottom: 6px;
+      box-shadow: 0 8px 24px #2980b933, 0 1.5px 8px #6dd5fa33;
+      transition: background 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    .loady-bounce::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -8px;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 8px;
+      background: radial-gradient(ellipse at center, #2980b933 0%, #fff0 80%);
+      border-radius: 50%;
+      filter: blur(1.5px);
+      opacity: 0.7;
+      z-index: 0;
+    }
+    .loady-animation-block:hover .loady-bounce {
+      background: radial-gradient(circle at 60% 40%, #2980B9 0%, #6dd5fa 100%);
+      box-shadow: 0 12px 32px #2980b955, 0 2px 12px #6dd5fa55;
+    }
+    @keyframes loady-bounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-38px) scale(1.12); }
+    }
+    /* Pulsating Ring Modern */
+    .loady-pulse-ring {
+      width: 56px;
+      height: 56px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .loady-pulse-ring-inner {
+      position: absolute;
+      width: 56px;
+      height: 56px;
+      border: 4px solid #2980B9;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: loady-pulse 1.15s cubic-bezier(.4,0,.2,1) infinite;
+      box-shadow: 0 0 24px #2980b933, 0 2px 12px #6dd5fa33;
+      background: linear-gradient(135deg, #eaf6ff 0%, #f7fbff 100%);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .loady-pulse-ring-inner::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle, #2980B9 60%, #6dd5fa 100%);
+      border-radius: 50%;
+      opacity: 0.85;
+      box-shadow: 0 0 8px #2980b955;
+    }
+    .loady-animation-block:hover .loady-pulse-ring-inner {
+      border-color: #1c5a85;
+      box-shadow: 0 0 40px #2980b9aa, 0 4px 16px #6dd5fa55;
+    }
+    @keyframes loady-pulse {
+      0% {
+        transform: scale(0.7);
+        opacity: 0.7;
+      }
+      70% {
+        transform: scale(1.25);
+        opacity: 0.08;
+      }
+      100% {
+        transform: scale(0.7);
+        opacity: 0.7;
+      }
+    }
+    @media (max-width: 700px) {
+      .loady-demo-container {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .loady-animation-block {
+        min-width: 0;
+        width: 90vw;
+        max-width: 370px;
+      }
+    }
+    @media (max-width: 480px) {
+      .loady-label {
+        font-size: 1.05rem;
+      }
+      .loady-animation-block {
+        padding: 1.5rem 0.7rem 1.2rem 0.7rem;
+      }
+    }
+    /* Import Inter font for modern look */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
+  </style>
+</head>
+<body>
+  <h1 style="font-size:2.3rem; color:#2980B9; font-weight:900; margin-top:2.2rem; letter-spacing:0.04em; text-align:center; text-shadow:0 2px 12px #6dd5fa33; font-family:'Inter','Segoe UI',Arial,sans-serif;">Loady CSS Loading Animations</h1>
+  <div class="loady-demo-container">
+    <div class="loady-animation-block">
+      <div class="loady-spinner" aria-label="Spinning Circle Loader"></div>
+      <div class="loady-label">Spinning Circle</div>
+    </div>
+    <div class="loady-animation-block">
+      <div class="loady-bounce" aria-label="Bouncing Dot Loader"></div>
+      <div class="loady-label">Bouncing Dot</div>
+    </div>
+    <div class="loady-animation-block">
+      <div class="loady-pulse-ring">
+        <div class="loady-pulse-ring-inner" aria-label="Pulsating Ring Loader"></div>
+      </div>
+      <div class="loady-label">Pulsating Ring</div>
+    </div>
+  </div>
+  <footer style="text-align:center; color:#6a7a8c; font-size:1.05rem; margin-bottom:2.2rem; font-family:'Inter','Segoe UI',Arial,sans-serif; letter-spacing:0.02em;">
+    <span style="font-weight:800; color:#2980B9;">Loady</span> &mdash; Pure CSS Loading Animations Demo
+  </footer>
+</body>
+</html>
